@@ -323,7 +323,47 @@
                                                 </ul> --}}
                                             </li>
                                             <li class="static"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
-
+                                                {{-- <ul class="dropdown">
+                                                    <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
+                                                        <ul class="dropdown">
+                                                            <li><a href="shop-grid-left-sidebar.html">shop grid left
+                                                                    sidebar</a></li>
+                                                            <li><a href="shop-grid-left-sidebar-3-col.html">left
+                                                                    sidebar 3 col</a></li>
+                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right
+                                                                    sidebar</a></li>
+                                                            <li><a href="shop-grid-right-sidebar-3-col.html">grid right
+                                                                    sidebar 3 col</a></li>
+                                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3
+                                                                    column</a></li>
+                                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4
+                                                                    column</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
+                                                        <ul class="dropdown">
+                                                            <li><a href="shop-list-left-sidebar.html">shop list left
+                                                                    sidebar</a></li>
+                                                            <li><a href="shop-list-right-sidebar.html">shop list right
+                                                                    sidebar</a></li>
+                                                            <li><a href="shop-list-full.html">shop list full width</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
+                                                        <ul class="dropdown">
+                                                            <li><a href="product-details.html">product details</a></li>
+                                                            <li><a href="product-details-affiliate.html">product
+                                                                    details
+                                                                    affiliate</a></li>
+                                                            <li><a href="product-details-variable.html">product details
+                                                                    variable</a></li>
+                                                            <li><a href="product-details-group.html">product details
+                                                                    group</a></li>
+                                                            <li><a href="product-details-box.html">product details box
+                                                                    slider</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul> --}}
                                             </li>
                                             <li class="static"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a>
 
