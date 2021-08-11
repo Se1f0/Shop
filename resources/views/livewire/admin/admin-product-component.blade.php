@@ -8,7 +8,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="\">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                                <li class="breadcrumb-item active" aria-current="page">Products</li>
                             </ul>
                         </nav>
                     </div>
@@ -35,31 +35,39 @@
                                             <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
                                         @endif
                                         <div class="myaccount-content">
-                                            <h3>All Categories</h3>
+                                            <h3>All Products</h3>
                                             <div class="myaccount-table table-responsive text-center">
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
                                                             <th>ID</th>
+                                                            <th>Image</th>
                                                             <th>Name</th>
-                                                            <th>Slug</th>
+                                                            <th>Stock</th>
+                                                            <th>Price</th>
+                                                            <th>Category</th>
+                                                            <th>Date</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($categories as $category)
+                                                        @foreach ($products as $product)
                                                             <tr>
-                                                                <td>{{$category->id}}</td>
-                                                                <td>{{$category->name}}</td>
-                                                                <td>{{$category->slug}}</td>
-                                                                <td><a href="{{route('admin.editcategory',['category_slug'=>$category->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-danger" wire:click.prevent="deleteCategory({{$category->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                                <td>{{$product->id}}</td>
+                                                                <td><img src="{{ asset('assets/img/product') }}/{{$product->image}}" alt=""></td>
+                                                                <td>{{$product->name}}</td>
+                                                                <td>{{$product->stock_status}}</td>
+                                                                <td>{{$product->regular_price}}</td>
+                                                                <td>{{$product->category->name}}</td>
+                                                                <td>{{$product->created_at}}</td>
+                                                                <td><a href="{{route('admin.editproduct',['product_slug' => $product->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-danger" wire:click.prevent="deleteProduct({{$product->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                <a href="{{route('admin.addcategory')}}" class="btn btn-success mb-10" role="button">Add New</a>
+                                                <a href="{{route('admin.addproduct')}}" class="btn btn-success mb-10" role="button">Add New</a>
                                                 <div class="mb-50 mt-20">
-                                                    {{$categories->links('pagination-links')}}
+                                                    {{$products->links('pagination-links')}}
                                                 </div>
                                             </div>
                                         </div>
