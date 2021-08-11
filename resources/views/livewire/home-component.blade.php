@@ -5,42 +5,28 @@
             <div class="col-lg-12">
                 <div class="slider-wrapper-area">
                     <div class="hero-slider-active hero__1 slick-dot-style hero-dot">
-                        <div class="single-slider" style="background-image: url({{ asset('assets/img/slider/slider11_bg.jpg') }});">
-                            <div class="container p-0">
-                                <div class="slider-main-content">
-                                    <div class="slider-content-img">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable1.png') }}" alt="">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable2.png') }}" alt="">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable3.png') }}" alt="">
-                                    </div>
-                                    <div class="slider-text">
-                                        <div class="slider-label">
-                                            <img src="{{ asset('assets/img/slider/slider11_lable4.png') }}" alt="">
+                        @foreach ($sliders as $slide)
+                            <div class="single-slider" style="background-image: url({{ asset('assets/img/slider')}}/{{$slide->image}});">
+                                <div class="container p-0">
+                                    <div class="slider-main-content">
+                                        <div class="slider-content-img">
+                                            {{-- <img src="{{ asset('assets/img/slider/slider11_lable1.png') }}" alt="">
+                                            <img src="{{ asset('assets/img/slider/slider11_lable2.png') }}" alt="">
+                                            <img src="{{ asset('assets/img/slider/slider11_lable3.png') }}" alt=""> --}}
                                         </div>
-                                        <h1>headphones az12</h1>
-                                        <p>Typi Non Habent Claritatem Insitam; Est Usus Legentis</p>
+                                        <div class="slider-text">
+                                            {{-- <div class="slider-label">
+                                                <img src="{{ asset('assets/img/slider/slider11_lable4.png') }}" alt="">
+                                            </div> --}}
+                                            <h1 >{{$slide->title}}</h1>
+                                            <p>{{$slide->subtitle}}</p>
+                                            <h2 class="mb-10 text-warning">Only price: <span class="regular-price">{{$slide->price}}$</span></h2>
+                                            <a href="{{$slide->link}}" class="btn btn-danger mt-10">Shop now</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="single-slider" style="background-image: url({{ asset('assets/img/slider/slider12_bg.jpg') }});">
-                            <div class="container p-0">
-                                <div class="slider-main-content">
-                                    <div class="slider-content-img">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable1.png') }}" alt="">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable2.png') }}" alt="">
-                                        <img src="{{ asset('assets/img/slider/slider11_lable3.png') }}" alt="">
-                                    </div>
-                                    <div class="slider-text">
-                                        <div class="slider-label">
-                                            <img src="{{ asset('assets/img/slider/slider11_lable4.png') }}" alt="">
-                                        </div>
-                                        <h1>samson s90</h1>
-                                        <p>Typi Non Habent Claritatem Insitam; Est Usus Legentis</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
