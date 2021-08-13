@@ -272,7 +272,7 @@
                                 <div class="main-menu">
                                     <nav id="mobile-menu">
                                         <ul>
-                                            <li class="active"><a href="/"><i class="fa fa-home"></i>Home</a>
+                                            <li class="{{\Request::route()->getName() == 'home' ? 'active' : 'static'}}"><a href="/"><i class="fa fa-home"></i>Home</a>
                                                 {{-- <ul class="dropdown">
                                                     <li><a href="index.html">Home version 01</a></li>
                                                     <li><a href="index-2.html">Home version 02</a></li>
@@ -280,7 +280,7 @@
                                                     <li><a href="index-4.html">Home version 04</a></li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="static"><a href="/shop"><i class="fa fa-shopping-bag"></i>Shop</a>
+                                            <li class="{{\Request::route()->getName() == 'shop' ? 'active' : 'static'}}"><a href="/shop"><i class="fa fa-shopping-bag"></i>Shop</a>
                                                 {{-- <ul class="megamenu dropdown">
                                                     <li class="mega-title"><a href="#">column 01</a>
                                                         <ul>
@@ -324,7 +324,7 @@
                                                     </li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="static"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
+                                            <li class="{{\Request::route()->getName() == 'product.cart' ? 'active' : 'static'}}"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
                                                 {{-- <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
                                                         <ul class="dropdown">
@@ -367,7 +367,7 @@
                                                     </li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="static"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a>
+                                            <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a>
 
                                             </li>
                                             <li class="static"><a href="contact-us.html"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li>
