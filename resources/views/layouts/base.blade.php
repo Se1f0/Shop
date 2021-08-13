@@ -24,6 +24,8 @@
     <!-- Main Style CSS -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/skin-default.css') }}" rel="stylesheet" id="galio-skin">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     @livewireStyles
 </head>
 
@@ -123,6 +125,7 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.categories') }}">Categories</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.products') }}">Products</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.homeslider') }}">Manage Home Slider</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.homecategories') }}">Manage Home Categories</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -677,7 +680,10 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
     <script src="{{ asset('assets/js/switcher.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
