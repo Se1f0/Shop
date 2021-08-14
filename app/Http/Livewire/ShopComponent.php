@@ -43,6 +43,7 @@ class ShopComponent extends Component
         }
         $product_count = Product::count();
         $pages = ceil($product_count/12);
-        return view('livewire.shop-component',['products' => $products,'count' => $product_count,'n_pages' => $pages])->layout("layouts.base");
+        $firs_p = 1;
+        return view('livewire.shop-component',['products' => $products,'count' => $product_count,'n_pages' => $pages,'pages' => $pages])->layout("layouts.base");
     }
 }

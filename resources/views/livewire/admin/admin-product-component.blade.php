@@ -27,7 +27,7 @@
                         <!-- My Account Tab Menu Start -->
                         <div class="row justify-content-center">
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8">
+                            <div class="col-lg-11 col-md-9">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade show active" id="orders" role="tabpanel">
@@ -45,6 +45,7 @@
                                                             <th>Name</th>
                                                             <th>Stock</th>
                                                             <th>Price</th>
+                                                            <th>Sale Price</th>
                                                             <th>Category</th>
                                                             <th>Date</th>
                                                             <th>Action</th>
@@ -58,6 +59,7 @@
                                                                 <td>{{$product->name}}</td>
                                                                 <td>{{$product->stock_status}}</td>
                                                                 <td>{{$product->regular_price}}</td>
+                                                                <td>{{$product->sale_price}}</td>
                                                                 <td>{{$product->category->name}}</td>
                                                                 <td>{{$product->created_at}}</td>
                                                                 <td><a href="{{route('admin.editproduct',['product_slug' => $product->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-danger" wire:click.prevent="deleteProduct({{$product->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>

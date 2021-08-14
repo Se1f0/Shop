@@ -27,7 +27,7 @@
                         <!-- My Account Tab Menu Start -->
                         <div class="row justify-content-center">
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8">
+                            <div class="col-lg-12 col-md-9">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade show active" id="orders" role="tabpanel">

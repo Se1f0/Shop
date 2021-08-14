@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="single-input-item">
                                                         <label for="image" class="required">Image</label>
-                                                        <input class="form-control form-control-lg" type="file" id="image" class="input-file" wire:model="newimage" required/>
+                                                        <input class="form-control form-control-lg" type="file" id="image" class="input-file" wire:model="newimage"/>
                                                         @if ($newimage)
                                                             <img src="{{$newimage->temporaryUrl()}}" width="120"/>
                                                         @else

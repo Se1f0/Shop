@@ -71,7 +71,16 @@
                                         <span>{{$product->stock_status}}</span>
                                     </div>
                                     <div class="pricebox">
-                                        <span class="regular-price">${{$product->regular_price}}</span>
+                                        @if ($product->sale_price > 0)
+                                            <div class="regular-price">
+                                                ${{$product->sale_price}}
+                                            </div>
+                                            <div class="old-price">
+                                                <del>${{$product->regular_price}}</del>
+                                            </div>
+                                        @else
+                                            <span class="regular-price">${{$product->regular_price}}</span>
+                                        @endif
                                     </div>
                                     <p>{{$product->short_description}}</p>
                                     <div class="quantity-cart-box d-flex align-items-center">
