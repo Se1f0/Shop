@@ -52,7 +52,10 @@
                                                                 <td>{{$category->id}}</td>
                                                                 <td>{{$category->name}}</td>
                                                                 <td>{{$category->slug}}</td>
-                                                                <td><a href="{{route('admin.editcategory',['category_slug'=>$category->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-danger" wire:click.prevent="deleteCategory({{$category->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                                <td>
+                                                                    <a href="{{route('admin.editcategory',['category_slug'=>$category->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                                    <a href="#" onclick="confirm('Are you sure,You want to delete this category?') || event.stopImmediatePropagation()" class="btn btn-danger" wire:click.prevent="deleteCategory({{$category->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>

@@ -1,0 +1,1 @@
+<li class="{{\Request::route()->getName() == 'product.wishlist' ? 'active' : 'static'}}"><a href="/wishlist"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist({{Cart::instance('wishlist')->count()}})</a></li>

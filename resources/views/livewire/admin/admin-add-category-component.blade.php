@@ -41,11 +41,17 @@
                                                 <form wire:submit.prevent="storeCategory">
                                                     <div class="single-input-item">
                                                         <label for="category-name" class="required">Category name</label>
-                                                        <input class="form-control" type="text" id="category-name" placeholder="Category name" wire:model="name" wire:keyup="generateslug" required autofocus/>
+                                                        <input class="form-control" type="text" id="category-name" placeholder="Category name" wire:model="name" wire:keyup="generateslug" autofocus/>
+                                                        @error('name')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                        @enderror
                                                     </div>
                                                     <div class="single-input-item">
                                                         <label for="category-slug" class="required">Category slug</label>
-                                                        <input class="form-control" type="text" id="category-slug" placeholder="Category slug" wire:model="slug" required/>
+                                                        <input class="form-control" type="text" id="category-slug" placeholder="Category slug" wire:model="slug"/>
+                                                        @error('slug')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                        @enderror
                                                     </div>
                                                     <div class="single-input-item">
                                                         <button class="check-btn sqr-btn" type="submit">Submit</button>

@@ -25,6 +25,7 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/skin-default.css') }}" rel="stylesheet" id="galio-skin">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @livewireStyles
 </head>
@@ -126,6 +127,7 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.products') }}">Products</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.homeslider') }}">Manage Home Slider</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.homecategories') }}">Manage Home Categories</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.sale') }}">Sale Setting</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -219,44 +221,7 @@
                                 </div>
                                 <div class="header-middle-block">
                                     @livewire('header-search-component')
-                                    <div class="header-mini-cart">
-                                        <div class="mini-cart-btn">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class="cart-notification">{{Cart::count()}}</span>
-                                        </div>
-                                        <div class="cart-total-price">
-                                            <span>total</span>
-                                            ${{Cart::total()}}
-                                        </div>
-                                        <ul class="cart-list">
-                                            @if (Cart::count() > 0)
-                                                @foreach (Cart::content() as $item)
-                                                    <li>
-                                                        <div class="cart-img">
-                                                            <a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img src="{{ asset('assets/img/cart') }}/{{$item->model->image}}"
-                                                                    alt=""></a>
-                                                        </div>
-                                                        <div class="cart-info">
-                                                            <h4><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->name}}</a></h4>
-                                                            <span>${{$item->model->regular_price}}</span>
-                                                        </div>
-                                                        {{-- <div class="del-icon">
-                                                            <i class="fa fa-times"></i>
-                                                        </div> --}}
-                                                    </li>
-                                                @endforeach
-                                                <li class="mini-cart-price">
-                                                    <span class="subtotal">subtotal : </span>
-                                                    <span class="subtotal-price">${{Cart::total()}}</span>
-                                                </li>
-                                                <li class="checkout-btn">
-                                                    <a href="\cart">Go to cart</a>
-                                                </li>
-                                            @else
-                                                <p>No item in cart</p>
-                                            @endif
-                                        </ul>
-                                    </div>
+                                    @livewire('cart-count-component')
                                 </div>
                             </div>
                         </div>
@@ -327,7 +292,7 @@
                                                     </li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="{{\Request::route()->getName() == 'product.cart' ? 'active' : 'static'}}"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
+                                            <li class="{{\Request::route()->getName() == 'product.cart' ? 'active' : 'static'}}"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart({{Cart::instance('cart')->count()}})</a>
                                                 {{-- <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
                                                         <ul class="dropdown">
@@ -370,11 +335,10 @@
                                                     </li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a>
-
-                                            </li>
-                                            <li class="static"><a href="contact-us.html"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li>
-                                            <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li>
+                                            @livewire('wishlist-count-component')
+                                            <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a></li>
+                                            {{-- <li class="static"><a href="contact-us.html"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li> --}}
+                                            {{-- <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li> --}}
                                         </ul>
                                     </nav>
                                 </div>
@@ -682,6 +646,12 @@
     <script src="{{ asset('assets/js/switcher.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.tiny.cloud/1/ouwy7vhemkph0w403wcs858w47vwx3q8sf3qhco8hgzprpxo/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     @livewireScripts
     @stack('scripts')
 </body>

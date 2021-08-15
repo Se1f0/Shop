@@ -68,6 +68,9 @@
 
                         <!-- product item start -->
                         <div class="shop-product-wrap grid row">
+                            @php
+                                $witems = Cart::instance('wishlist')->content()->pluck('id');
+                            @endphp
                             @foreach ($products as $product)
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <!-- product single grid item start -->
@@ -77,12 +80,18 @@
                                                 <img src="{{ asset('assets/img/product') }}/{{$product->image}}" class="img-pri" alt="">
                                                 {{-- <img src="{{ asset('assets/img/product/product-img2.jpg') }}" class="img-sec" alt=""> --}}
                                             </a>
-                                            {{-- <div class="product-label">
-                                                <span>hot</span>
-                                            </div> --}}
+                                            @if ($witems->contains($product->id))
+                                                <div class="product-label-wish">
+                                                    <span><i class="fa fa-heart"></i></span>
+                                                </div>
+                                            @endif
                                             <div class="product-action-link">
                                                 {{-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" data-placement="left" title="Quick view"><i class="fa fa-search"></i></span> </a> --}}
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                                                @if ($witems->contains($product->id))
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart"></i></a>
+                                                @else
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to Wishlist" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fa fa-heart-o"></i></a>
+                                                @endif
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i class="fa fa-refresh"></i></a>
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="fa fa-shopping-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"></i></a>
                                             </div>
@@ -90,7 +99,16 @@
                                         <div class="product-content">
                                             <h4><a href="{{route('product.details',['slug'=>$product->slug])}}">{{$product->name}}</a></h4>
                                             <div class="pricebox">
-                                                <span class="regular-price">${{$product->regular_price}}</span>
+                                                @if ($product->sale_price > 0)
+                                                    <div class="regular-price">
+                                                        ${{$product->sale_price}}
+                                                    </div>
+                                                    <div class="old-price">
+                                                        <del>${{$product->regular_price}}</del>
+                                                    </div>
+                                                @else
+                                                    <span class="regular-price">${{$product->regular_price}}</span>
+                                                @endif
                                                 <div class="ratings">
                                                     <span class="good"><i class="fa fa-star"></i></span>
                                                     <span class="good"><i class="fa fa-star"></i></span>
@@ -112,9 +130,11 @@
                                                 <img src="{{ asset('assets/img/product') }}/{{$product->image}}" class="img-pri" alt="">
                                                 {{-- <img src="{{ asset('assets/img/product/product-img2.jpg') }}" class="img-sec" alt=""> --}}
                                             </a>
-                                            {{-- <div class="product-label">
-                                                <span>hot</span>
-                                            </div> --}}
+                                            @if ($witems->contains($product->id))
+                                                <div class="product-label-wish">
+                                                    <span><i class="fa fa-heart"></i></span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="product-list-content">
                                             <h3><a href="{{route('product.details',['slug'=>$product->slug])}}">{{$product->name}}</a></h3>
@@ -136,7 +156,11 @@
                                             <div class="product-list-action-link">
                                                 <a class="buy-btn" href="#" data-toggle="tooltip" data-placement="top" title="Add to cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">go to buy <i class="fa fa-shopping-cart"></i> </a>
                                                 {{-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" data-placement="top" title="Quick view"><i class="fa fa-search"></i></span> </a> --}}
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                                                @if ($witems->contains($product->id))
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart"></i></a>
+                                                @else
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to Wishlist" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fa fa-heart-o"></i></a>
+                                                @endif
                                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a>
                                             </div>
                                         </div>

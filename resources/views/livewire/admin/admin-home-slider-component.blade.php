@@ -63,7 +63,8 @@
                                                                 <td>{{$slider->status == 1 ? 'Active' : 'Inactive'}}</td>
                                                                 <td>{{$slider->created_at}}</td>
                                                                 <td><a href="{{route('admin.edithomeslider',['slide_id' => $slider->id])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                                    <a href="#" class="btn btn-danger" wire:click.prevent="deleteSlide({{$slider->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                                    <a href="#" onclick="confirm('Are you sure,You want to delete this slide?') || event.stopImmediatePropagation()" class="btn btn-danger" wire:click.prevent="deleteSlide({{$slider->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>

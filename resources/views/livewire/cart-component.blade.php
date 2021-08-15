@@ -27,7 +27,7 @@
                     <strong>Success</strong> {{Session::get('success_message')}}
                 </div>
             @endif
-            @if (Cart::count() > 0)
+            @if (Cart::instance('cart')->count() > 0)
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Cart Table Area -->
@@ -44,7 +44,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach (Cart::content() as $item)
+                                @foreach (Cart::instance('cart')->content() as $item)
                                     <tr>
                                         <td class="pro-thumbnail"><a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img class="img-fluid" src="{{asset('assets/img/product')}}/{{$item->model->image}}"
                                                                                     alt="Product"/></a></td>
@@ -61,53 +61,6 @@
                                         <td class="pro-remove"><a href="#" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="fa fa-trash-o"></i></a></td>
                                     </tr>
                                 @endforeach
-                                {{-- <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-img2.jpg"
-                                                                                alt="Product"/></a></td>
-                                    <td class="pro-title"><a href="#">k2 snowboard 2018</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="pro-qty"><input type="text" value="1"></div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-img3.jpg"
-                                                                                alt="Product"/></a></td>
-                                    <td class="pro-title"><a href="#">Aquet Drone D 420</a></td>
-                                    <td class="pro-price"><span>$275.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="pro-qty"><input type="text" value="2"></div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$550.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-img4.jpg" alt="Product"/></a></td>
-                                    <td class="pro-title"><a href="#">berzerker snowboard</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-img5.jpg"
-                                                                                alt="Product"/></a></td>
-                                    <td class="pro-title"><a href="#">element snowboard</a></td>
-                                    <td class="pro-price"><span>$110.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="3" />
-                                        </div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$110.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -137,15 +90,15 @@
                                     <table class="table">
                                         <tr>
                                             <td>Sub Total</td>
-                                            <td>${{Cart::subtotal()}}</td>
+                                            <td>${{Cart::instance('cart')->subtotal()}}</td>
                                         </tr>
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>${{Cart::tax()}}</td>
+                                            <td>${{Cart::instance('cart')->tax()}}</td>
                                         </tr>
                                         <tr class="total">
                                             <td>Total</td>
-                                            <td class="total-amount">${{Cart::total()}}</td>
+                                            <td class="total-amount">${{Cart::instance('cart')->total()}}</td>
                                         </tr>
                                     </table>
                                 </div>

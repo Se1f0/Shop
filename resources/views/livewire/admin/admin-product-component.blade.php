@@ -62,7 +62,10 @@
                                                                 <td>{{$product->sale_price}}</td>
                                                                 <td>{{$product->category->name}}</td>
                                                                 <td>{{$product->created_at}}</td>
-                                                                <td><a href="{{route('admin.editproduct',['product_slug' => $product->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-danger" wire:click.prevent="deleteProduct({{$product->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                                                <td>
+                                                                    <a href="{{route('admin.editproduct',['product_slug' => $product->slug])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                                    <a href="#" onclick="confirm('Are you sure,You want to delete this product?') || event.stopImmediatePropagation()" class="btn btn-danger" wire:click.prevent="deleteProduct({{$product->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>

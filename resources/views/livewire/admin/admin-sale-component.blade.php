@@ -8,8 +8,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="\">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.categories')}}">Categories</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sales</li>
                             </ul>
                         </nav>
                     </div>
@@ -36,25 +35,22 @@
                                             <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
                                         @endif
                                         <div class="myaccount-content">
-                                            <h3>Edit Category</h3>
+                                            <h3>Sales Setting</h3>
                                             <div class="account-details-form">
-                                                <form wire:submit.prevent="updateCategory">
+                                                <form>
                                                     <div class="single-input-item">
-                                                        <label for="category-name" class="required">Category name</label>
-                                                        <input type="text" id="category-name" placeholder="Category name" wire:model="name" wire:keyup="generateslug" autofocus/>
-                                                        @error('name')
-                                                            <p class="text-danger">{{$message}}</p>
-                                                        @enderror
+                                                        <label for="status" class="required">Status</label>
+                                                        <select class="form-control" name="status" id="status">
+                                                            <option value="0">Inactive</option>
+                                                            <option value="1">Active</option>
+                                                        </select>
                                                     </div>
                                                     <div class="single-input-item">
-                                                        <label for="category-slug" class="required">Category slug</label>
-                                                        <input type="text" id="category-slug" placeholder="Category slug" wire:model="slug"/>
-                                                        @error('slug')
-                                                            <p class="text-danger">{{$message}}</p>
-                                                        @enderror
+                                                        <label for="sale-date">Sale Date</label>
+                                                        <input class="form-control" type="text" id="sale-date" placeholder="YYYY/MM/DD H:M:S"/>
                                                     </div>
                                                     <div class="single-input-item">
-                                                        <button class="check-btn sqr-btn" type="submit"><i class="fa fa-pencil" aria-hidden="true"></i>  Update</button>
+                                                        <button class="check-btn sqr-btn" type="submit">Submit</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -69,3 +65,16 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(function () {
+            $('#sale-date').datetimepicker({
+                format : 'Y-MM-DD h:m:s',
+            })
+            .on('dp.change',function (ev) {
+
+            })
+        })
+    </script>
+@endpush
