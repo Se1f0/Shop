@@ -49,7 +49,11 @@
                                         <td class="pro-thumbnail"><a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img class="img-fluid" src="{{asset('assets/img/product')}}/{{$item->model->image}}"
                                                                                     alt="Product"/></a></td>
                                         <td class="pro-title"><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->name}}</a></td>
-                                        <td class="pro-price"><span>${{$item->model->regular_price}}</span></td>
+                                        @if ($item->model->sale_price > 0)
+                                            <td class="pro-price"><span>${{$item->model->sale_price}}</span></td>
+                                        @else
+                                            <td class="pro-price"><span>${{$item->model->regular_price}}</span></td>
+                                        @endif
                                         <td class="pro-quantity">
                                             <div class="pro-qty">
                                                 <span class="dec qtybtn" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')">-</span>

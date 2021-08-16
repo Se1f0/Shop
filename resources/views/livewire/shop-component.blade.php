@@ -93,7 +93,12 @@
                                                     <a href="#" data-toggle="tooltip" data-placement="left" title="Add to Wishlist" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fa fa-heart-o"></i></a>
                                                 @endif
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i class="fa fa-refresh"></i></a>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="fa fa-shopping-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"></i></a>
+                                                @if ($product->sale_price > 0)
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="fa fa-shopping-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->sale_price}})"></i></a>
+                                                @else
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="fa fa-shopping-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"></i></a>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <div class="product-content">
@@ -154,7 +159,11 @@
                                             </div>
                                             <p>{{$product->short_description}}</p>
                                             <div class="product-list-action-link">
-                                                <a class="buy-btn" href="#" data-toggle="tooltip" data-placement="top" title="Add to cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">go to buy <i class="fa fa-shopping-cart"></i> </a>
+                                                @if ($product->sale_price > 0)
+                                                    <a class="buy-btn" href="#" data-toggle="tooltip" data-placement="top" title="Add to cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->sale_price}})">go to buy <i class="fa fa-shopping-cart"></i> </a>
+                                                @else
+                                                    <a class="buy-btn" href="#" data-toggle="tooltip" data-placement="top" title="Add to cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">go to buy <i class="fa fa-shopping-cart"></i> </a>
+                                                @endif
                                                 {{-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" data-placement="top" title="Quick view"><i class="fa fa-search"></i></span> </a> --}}
                                                 @if ($witems->contains($product->id))
                                                     <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart"></i></a>

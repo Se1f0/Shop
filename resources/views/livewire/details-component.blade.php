@@ -31,7 +31,7 @@
                     <div class="product-details-inner">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="product-large-slider mb-20 slick-arrow-style_2">
+                                <div class="product-large-slider mb-20 slick-arrow-style_2" wire:ignore>
                                     <div class="pro-large-img img-zoom" id="img1">
                                         <img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="" />
                                     </div>
@@ -45,7 +45,7 @@
                                         <img src="{{ asset('assets/img/product/product-details-img4.jpg')}}" alt=""/>
                                     </div>
                                 </div>
-                                <div class="pro-nav slick-padding2 slick-arrow-style_2">
+                                <div class="pro-nav slick-padding2 slick-arrow-style_2" wire:ignore>
                                     <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="" /></div>
                                     <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img2.jpg')}}" alt="" /></div>
                                     <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img3.jpg')}}" alt="" /></div>
@@ -89,13 +89,17 @@
                                     <div class="quantity-cart-box d-flex align-items-center">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <span class="dec qtybtn">-</span>
-                                                <input type="text" value="1">
-                                                <span class="inc qtybtn">+</span>
+                                                <span class="dec qtybtn" wire:click.prevent="decreaseQuantity">-</span>
+                                                <input type="text" value="1" pattern="[0-9]*" wire:model="qty">
+                                                <span class="inc qtybtn" wire:click.prevent="increaseQuantity">+</span>
                                             </div>
                                         </div>
                                         <div class="action_link">
-                                            <a class="buy-btn" href="#" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">add to cart<i class="fa fa-shopping-cart"></i></a>
+                                            @if ($product->sale_price > 0)
+                                                <a class="buy-btn" href="#" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->sale_price}})">add to cart<i class="fa fa-shopping-cart"></i></a>
+                                            @else
+                                                <a class="buy-btn" href="#" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">add to cart<i class="fa fa-shopping-cart"></i></a>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="useful-links mt-20">

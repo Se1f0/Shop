@@ -45,7 +45,7 @@
                                             <td class="pro-title"><a href="{{route('product.details',['slug' => $item->model->slug])}}">{{$item->model->name}}</a></td>
                                             <td class="pro-price"><span>${{$item->model->regular_price}}</span></td>
                                             <td class="pro-quantity"><span class="text-success">{{$item->model->stock_status}}</span></td>
-                                            <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to Cart</a></td>
+                                            <td class="pro-subtotal"><a href="#" class="sqr-btn text-white" wire:click.prevent="moveProductFromWishlistToCart('{{$item->rowId}}')">Move to Cart</a></td>
                                             <td class="pro-remove"><a href="#" wire:click.prevent="removeFromWishlist({{$item->model->id}})"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                     @endforeach

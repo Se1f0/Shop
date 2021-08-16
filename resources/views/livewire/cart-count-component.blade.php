@@ -12,8 +12,7 @@
             @foreach (Cart::instance('cart')->content() as $item)
                 <li>
                     <div class="cart-img">
-                        <a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img src="{{ asset('assets/img/cart') }}/{{$item->model->image}}"
-                                alt=""></a>
+                        <a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img src="{{ asset('assets/img/product') }}/{{$item->model->image}}" alt=""></a>
                     </div>
                     <div class="cart-info">
                         <h4><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->name}}</a></h4>
