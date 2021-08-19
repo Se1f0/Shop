@@ -128,6 +128,7 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.homeslider') }}">Manage Home Slider</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.homecategories') }}">Manage Home Categories</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.sale') }}">Sale Setting</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.coupons') }}">All coupons</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
