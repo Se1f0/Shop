@@ -71,12 +71,17 @@
 
                         <!-- Cart Update Option -->
                         <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="apply-coupon-wrapper">
-                                <form action="#" method="post" class=" d-block d-md-flex">
-                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                    <button class="sqr-btn">Apply Coupon</button>
-                                </form>
-                            </div>
+                            @if (!Session::has('coupon'))
+                                <div class="apply-coupon-wrapper">
+                                    @if (Session::has('coupon_message'))
+                                        <div class="alert alert-danger" role="danger">{{Session::get('coupon_message')}}</div>
+                                    @endif
+                                    <form class=" d-block d-md-flex" wire:submit.prevent="applyCouponCode">
+                                        <input type="text" placeholder="Enter Your Coupon Code" required wire:model="couponCode"/>
+                                        <button class="sqr-btn" type="submit">Apply Coupon</button>
+                                    </form>
+                                </div>
+                            @endif
                             <div class="cart-update mt-sm-16">
                                 <a href="#" class="sqr-btn" wire:click.prevent="destroyAll()">Clear Shopping Cart</a>
                             </div>
@@ -96,14 +101,33 @@
                                             <td>Sub Total</td>
                                             <td>${{Cart::instance('cart')->subtotal()}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Shipping</td>
-                                            <td>${{Cart::instance('cart')->tax()}}</td>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Total</td>
-                                            <td class="total-amount">${{Cart::instance('cart')->total()}}</td>
-                                        </tr>
+                                        @if (Session::has('coupon'))
+                                            <tr>
+                                                <td>Discount({{Session::get('coupon')['code']}})<a href="#" wire:click.prevent="removeCoupon"><i class="fa fa-times text-danger"></i></a></td>
+                                                <td>- ${{number_format($discount,2)}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Subtotal with Discount</td>
+                                                <td>${{number_format($subtotalAfterDiscount,2)}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tax({{config('cart.tax')}}%)</td>
+                                                <td>${{number_format($taxAfterDiscount,2)}}</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td>Total</td>
+                                                <td class="total-amount">${{number_format($totalAfterDiscount,2)}}</td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td>Tax</td>
+                                                <td>${{Cart::instance('cart')->tax()}}</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td>Total</td>
+                                                <td class="total-amount">${{Cart::instance('cart')->total()}}</td>
+                                            </tr>
+                                        @endif
                                     </table>
                                 </div>
                             </div>
