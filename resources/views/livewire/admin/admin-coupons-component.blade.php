@@ -46,6 +46,7 @@
                                                                 <th>Coupon Type</th>
                                                                 <th>Coupon Value</th>
                                                                 <th>Cart Value</th>
+                                                                <th>Expiry Date</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -60,7 +61,8 @@
                                                                     @else
                                                                         <td>{{$coupon->value}}%</td>
                                                                     @endif
-                                                                    <td>{{$coupon->cart_value}}</td>
+                                                                    <td>{{$coupon->cart_value}}$</td>
+                                                                    <td>{{$coupon->expiry_date}}</td>
                                                                     <td>
                                                                         <a href="{{route('admin.editcoupon',['coupon_id' => $coupon->id])}}" class="btn btn-secondary mr-10"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                                         <a href="#" onclick="confirm('Are you sure,You want to delete this coupon?') || event.stopImmediatePropagation()" class="btn btn-danger" wire:click.prevent="deleteCoupon({{$coupon->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
