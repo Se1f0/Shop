@@ -131,7 +131,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="sqr-btn d-block">Proceed To Checkout</a>
+                            <a href="#" class="sqr-btn d-block" wire:click.prevent="checkout">Proceed To Checkout</a>
                         </div>
                     </div>
                 </div>

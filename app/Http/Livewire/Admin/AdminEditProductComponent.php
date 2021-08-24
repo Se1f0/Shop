@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 
 class AdminEditProductComponent extends Component
 {
@@ -54,7 +55,8 @@ class AdminEditProductComponent extends Component
     {
         $this->validateOnly($fields,[
             'name' => 'required',
-            'slug' => 'required|unique:products',
+            'slug' => ['required',Rule::unique('products')->ignore($this->product_id)],
+            // 'slug' => 'required|unique:products',
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
@@ -71,7 +73,8 @@ class AdminEditProductComponent extends Component
     {
         $this->validate([
             'name' => 'required',
-            'slug' => 'required|unique:products',
+            'slug' => ['required',Rule::unique('products')->ignore($this->product_id)],
+            // 'slug' => 'required|unique:products',
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
@@ -101,6 +104,7 @@ class AdminEditProductComponent extends Component
         }
         $product->category_id = $this->category_id;
         $product->save();
+        redirect()->route('admin.editproduct',['product_slug' => $this->slug]);
         session()->flash('message','Product has been updated successfully!');
     }
 

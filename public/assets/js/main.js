@@ -557,16 +557,16 @@
 		$(".account-create").slideToggle("100");
 	});
 
-	$("#ship_to_different").on("change", function () {
-		$(".ship-to-different").slideToggle("100");
-	});
+	// $("#ship_to_different").on("change", function () {
+	// 	$(".ship-to-different").slideToggle("100");
+	// });
 
 	// Payment Method Accordion
-	$('input[name="paymentmethod"]').on('click', function () {
-		var $value = $(this).attr('value');
-		$('.payment-method-details').slideUp();
-		$('[data-method="' + $value + '"]').slideDown();
-	});
+	// $('input[name="paymentmethod"]').on('click', function () {
+	// 	var $value = $(this).attr('value');
+	// 	$('.payment-method-details').slideUp();
+	// 	$('[data-method="' + $value + '"]').slideDown();
+	// });
 
 	// scroll to top
 	$('body').on('click', '.scroll-top', function (e) {

@@ -294,7 +294,7 @@
                                                     </li>
                                                 </ul> --}}
                                             </li>
-                                            <li class="{{\Request::route()->getName() == 'product.cart' ? 'active' : 'static'}}"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart({{Cart::instance('cart')->count()}})</a>
+                                            <li class="{{\Request::route()->getName() == 'product.cart' ? 'active' : 'static'}}"><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
                                                 {{-- <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
                                                         <ul class="dropdown">
@@ -338,9 +338,9 @@
                                                 </ul> --}}
                                             </li>
                                             @livewire('wishlist-count-component')
-                                            <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a></li>
-                                            {{-- <li class="static"><a href="contact-us.html"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li> --}}
-                                            {{-- <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li> --}}
+                                            {{-- <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a></li> --}}
+                                            <li class="static"><a href="\thank-you"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li>
+                                            <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li>
                                         </ul>
                                     </nav>
                                 </div>

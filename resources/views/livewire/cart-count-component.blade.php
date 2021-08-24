@@ -15,8 +15,8 @@
                         <a href="{{route('product.details',['slug'=>$item->model->slug])}}"><img src="{{ asset('assets/img/product') }}/{{$item->model->image}}" alt=""></a>
                     </div>
                     <div class="cart-info">
-                        <h4><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->name}}</a></h4>
-                        <span>${{$item->model->regular_price}}</span>
+                        <h4><a href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->name}}<strong> × {{$item->qty}}</strong></a></h4>
+                        <span>${{$item->subtotal}}</span>
                     </div>
                     {{-- <div class="del-icon">
                         <i class="fa fa-times"></i>

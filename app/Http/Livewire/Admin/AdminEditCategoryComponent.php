@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class AdminEditCategoryComponent extends Component
 {
@@ -32,7 +33,8 @@ class AdminEditCategoryComponent extends Component
     {
         $this->validateOnly($fields,[
             'name' => 'required',
-            'slug' => 'required|unique:categories'
+            'slug' => ['required',Rule::unique('categories')->ignore($this->category_id)]
+            // 'slug' => 'required|unique:categories'
         ]);
     }
 
@@ -40,7 +42,8 @@ class AdminEditCategoryComponent extends Component
     {
         $this->validate([
             'name' => 'required',
-            'slug' => 'required|unique:categories'
+            'slug' => ['required',Rule::unique('categories')->ignore($this->category_id)]
+            // 'slug' => 'required|unique:categories'
         ]);
         $category = Category::find($this->category_id);
         $category->name = $this->name;
