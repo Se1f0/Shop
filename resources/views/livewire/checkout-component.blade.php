@@ -22,6 +22,11 @@
     <!-- checkout main wrapper start -->
     <div class="checkout-page-wrapper">
         <div class="container">
+            @if (Session::has('stripe_error'))
+                <div class="alert alert-danger">
+                    <strong>Success</strong> {{Session::get('stripe_error')}}
+                </div>
+            @endif
             <form wire:submit.prevent="placeOrder">
                 <div class="row">
                     <!-- Checkout Billing Details -->
@@ -212,7 +217,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Total Amount</td>
-                                                @if (Session::has('checkout'))*
+                                                @if (Session::has('checkout'))
                                                     <td><strong>${{Session::get('checkout')['total']}}</strong></td>
                                                 @endif
                                             </tr>
@@ -233,11 +238,45 @@
                                         @endif
                                         <div class="custom-control custom-radio mt-20">
                                             <input type="radio" id="paypalpayment" name="paymentmethod" value="card" class="custom-control-input" wire:model="payementmode" />
-                                            <label class="custom-control-label" for="paypalpayment">Paypal</label>
+                                            <label class="custom-control-label" for="paypalpayment">Credit Card</label>
                                         </div>
                                         @if ($payementmode == "card")
                                             <div class="payment-method-details mb-20 mt-20 ml-20" data-method="card" style="background-color: #f1f1f1;">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                                {{-- <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p> --}}
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="single-input-item">
+                                                            <label class="required">Card Number</label>
+                                                            <input type="text" placeholder="Card Number" wire:model="card_no" />
+                                                            @error('card_no') <span class="text-danger">{{$message}}</span> @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="single-input-item">
+                                                            <label class="required">Expiry Month</label>
+                                                            <input type="text" placeholder="Expiry Month" wire:model="exp_month" />
+                                                            @error('exp_month') <span class="text-danger">{{$message}}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="single-input-item">
+                                                            <label class="required">Expiry Year</label>
+                                                            <input type="text" placeholder="Expiry Year" wire:model="exp_year" />
+                                                            @error('exp_year') <span class="text-danger">{{$message}}</span> @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="single-input-item">
+                                                            <label class="required">CCV</label>
+                                                            <input type="password" placeholder="CCV" wire:model="cvc" />
+                                                            @error('cvc') <span class="text-danger">{{$message}}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endif
                                     </div>

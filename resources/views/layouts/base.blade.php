@@ -130,6 +130,7 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.homecategories') }}">Manage Home Categories</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.sale') }}">Sale Setting</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.coupons') }}">All coupons</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.orders') }}">All orders</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -150,6 +151,7 @@
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="myaccount">
                                                                 <a class="dropdown-item" href="{{ route('user.dashboard') }}">Dashboard</a>
+                                                                <a class="dropdown-item" href="{{route('user.orders')}}">My Orders</a>
                                                                 <a class="dropdown-item" href="my-account.html">My Wishlist</a>
                                                                 <a class="dropdown-item" href="my-account.html">My Cart</a>
                                                                 <a class="dropdown-item" href="my-account.html">Checkout</a>
