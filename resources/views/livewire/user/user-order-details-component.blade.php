@@ -21,7 +21,6 @@
 
     <div class="my-account-wrapper">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-12">
                     <!-- My Account Page Start -->
@@ -100,7 +99,12 @@
                                     <tr>
                                         <td class="pro-thumbnail"><a href="{{route('product.details',['slug'=>$item->product->slug])}}"><img class="img-fluid" src="{{asset('assets/img/product')}}/{{$item->product->image}}"
                                                                                     alt="Product"/></a></td>
-                                        <td class="pro-title"><a href="{{route('product.details',['slug'=>$item->product->slug])}}">{{$item->product->name}}</a></td>
+                                        <td class="pro-title">
+                                            <a href="{{route('product.details',['slug'=>$item->product->slug])}}">{{$item->product->name}}</a>
+                                            @if ($order->status == 'delivered' && $item->rstatus == false)
+                                                <br><br><a href="{{route('user.review',['order_item_id' => $item->id])}}" class="btn btn-warning">Review this item</a>
+                                            @endif
+                                        </td>
                                         @if ($item->product->sale_price > 0)
                                             <td class="pro-price"><span>${{$item->product->sale_price}}</span></td>
                                         @else
