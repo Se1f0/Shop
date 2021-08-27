@@ -115,13 +115,24 @@
                                                     <span class="regular-price">${{$product->regular_price}}</span>
                                                 @endif
                                                 <div class="ratings">
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span><i class="fa fa-star"></i></span>
+                                                    @php
+                                                        $avgrating = 0;
+                                                    @endphp
+                                                    @foreach ($product->orderItems->where('rstatus',1) as $orderItem)
+                                                        @php
+                                                            $avgrating = ($avgrating + $orderItem->review->rating)/$product->orderItems->where('rstatus',1)->count();
+                                                            $avgrating = ceil($avgrating);
+                                                        @endphp
+                                                    @endforeach
+                                                    @for ($i=1;$i<=5;$i++)
+                                                        @if ($i<=$avgrating)
+                                                            <span class="good"><i class="fa fa-star"></i></span>
+                                                        @else
+                                                            <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                                        @endif
+                                                    @endfor
                                                     <div class="pro-review">
-                                                        <span>1 review(s)</span>
+                                                        <span>{{$product->orderItems->where('rstatus',1)->count()}} review(s)</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,13 +155,24 @@
                                         <div class="product-list-content">
                                             <h3><a href="{{route('product.details',['slug'=>$product->slug])}}">{{$product->name}}</a></h3>
                                             <div class="ratings">
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
+                                                @php
+                                                    $avgrating = 0;
+                                                @endphp
+                                                @foreach ($product->orderItems->where('rstatus',1) as $orderItem)
+                                                    @php
+                                                        $avgrating = ($avgrating + $orderItem->review->rating)/$product->orderItems->where('rstatus',1)->count();
+                                                        $avgrating = ceil($avgrating);
+                                                    @endphp
+                                                @endforeach
+                                                @for ($i=1;$i<=5;$i++)
+                                                    @if ($i<=$avgrating)
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                    @else
+                                                        <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                                    @endif
+                                                @endfor
                                                 <div class="pro-review">
-                                                    <span>1 review(s)</span>
+                                                    <span>{{$product->orderItems->where('rstatus',1)->count()}} review(s)</span>
                                                 </div>
                                             </div>
                                             <div class="pricebox">

@@ -56,7 +56,12 @@
                 </div>
                 <!-- Wishlist Page Content End -->
             @else
-                <h1 class="display-5 text-center text-muted">No item in the wishlist</h1>
+                <h1 class="display-5 text-center text-muted">Wishlist is empty!</h1>
+                <div class="row justify-content-center  mt-10 ml-10">
+                    <div class="col-2">
+                        <a href="/shop" class="btn btn-danger">Check the Shop</a>
+                    </div>
+                </div>
             @endif
         </div>
     </div>

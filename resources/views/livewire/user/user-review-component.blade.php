@@ -9,7 +9,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="\">Home</a></li>
                                 <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.orders')}}">My Orders</a></li>
-                                <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.orderdetails',['order_id' => $order_item_id])}}">Order Details</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.orderdetails',['order_id' => $orderItem->order->id])}}">Order Details</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Review</li>
                             </ul>
                         </nav>

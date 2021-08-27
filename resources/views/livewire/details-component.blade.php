@@ -8,7 +8,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item"><a href="shop-grid-left-sidebar.html">shop</a></li>
+                                <li class="breadcrumb-item"><a href="/shop">shop</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">product details</li>
                             </ul>
                         </nav>
@@ -55,20 +55,31 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="product-details-des mt-md-34 mt-sm-34">
-                                    <h3><a href="product-details.html">{{$product->name}}</a></h3>
+                                    <h3><a href="{{route('product.details',['slug' => $product->slug])}}">{{$product->name}}</a></h3>
                                     <div class="ratings">
-                                        <span class="good"><i class="fa fa-star"></i></span>
-                                        <span class="good"><i class="fa fa-star"></i></span>
-                                        <span class="good"><i class="fa fa-star"></i></span>
-                                        <span class="good"><i class="fa fa-star"></i></span>
-                                        <span><i class="fa fa-star"></i></span>
+                                        @php
+                                            $avgrating = 0;
+                                        @endphp
+                                        @foreach ($product->orderItems->where('rstatus',1) as $orderItem)
+                                            @php
+                                                $avgrating = ($avgrating + $orderItem->review->rating)/$product->orderItems->where('rstatus',1)->count();
+                                                $avgrating = ceil($avgrating);
+                                            @endphp
+                                        @endforeach
+                                        @for ($i=1;$i<=5;$i++)
+                                            @if ($i<=$avgrating)
+                                                <span class="good"><i class="fa fa-star"></i></span>
+                                            @else
+                                                <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                            @endif
+                                        @endfor
                                         <div class="pro-review">
-                                            <span>1 review(s)</span>
+                                            <span>{{$product->orderItems->where('rstatus',1)->count()}} review(s)</span>
                                         </div>
                                     </div>
-                                    <div class="customer-rev">
-                                        <a href="#">(1 customer review)</a>
-                                    </div>
+                                    {{-- <div class="customer-rev">
+                                        <a href="#">({{$product->orderItems->where('rstatus',1)->count()}} customer review)</a>
+                                    </div> --}}
                                     <div class="availability mt-10">
                                         <h5>Availability:</h5>
                                         <span>{{$product->stock_status}}</span>
@@ -176,65 +187,34 @@
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" class="review-form">
-                                                <h5>1 review for Simple product 12</h5>
+                                            <h5 class="mb-20">{{$product->orderItems->where('rstatus',1)->count()}} review for {{$product->name}}</h5>
+                                            @foreach ($product->orderItems->where('rstatus',1) as $orderItem)
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
                                                         <img src="{{ asset('assets/img/about/avatar.jpg')}}" alt="">
                                                     </div>
                                                     <div class="review-box">
                                                         <div class="ratings">
+                                                            @for ($i=1;$i<=5;$i++)
+                                                                @if ($i <= $orderItem->review->rating)
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                @else
+                                                                    <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                                                @endif
+                                                            @endfor
+                                                            {{-- <span class="good"><i class="fa fa-star"></i></span>
                                                             <span class="good"><i class="fa fa-star"></i></span>
                                                             <span class="good"><i class="fa fa-star"></i></span>
                                                             <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span><i class="fa fa-star"></i></span>
+                                                            <span><i class="fa fa-star"></i></span> --}}
                                                         </div>
                                                         <div class="post-author">
-                                                            <p><span>admin -</span> 30 Nov, 2018</p>
+                                                            <p><span>{{$orderItem->order->user->name}} -</span> {{Carbon\Carbon::parse($orderItem->review->created_at->format('d F Y g:i A'))}}</p>
                                                         </div>
-                                                        <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut venenatis vitae, malesuada ut mi. Quisque iaculis, dui congue placerat pretium, augue erat accumsan lacus</p>
+                                                        <p>{{$orderItem->review->comment}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span> Your Name</label>
-                                                        <input type="text" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span> Your Email</label>
-                                                        <input type="email" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span> Your Review</label>
-                                                        <textarea class="form-control" required></textarea>
-                                                        <div class="help-block pt-10"><span class="text-danger">Note:</span> HTML is not translated!</div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span> Rating</label>
-                                                        &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                        <input type="radio" value="1" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="2" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="3" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="4" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Good
-                                                    </div>
-                                                </div>
-                                                <div class="buttons">
-                                                    <button class="sqr-btn" type="submit">Continue</button>
-                                                </div>
-                                            </form> <!-- end of review-form -->
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -279,13 +259,24 @@
                                         <div class="pricebox">
                                             <span class="regular-price">${{$r_product->regular_price}}</span>
                                             <div class="ratings">
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span class="good"><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
+                                                @php
+                                                    $avgrating = 0;
+                                                @endphp
+                                                @foreach ($r_product->orderItems->where('rstatus',1) as $orderItem)
+                                                    @php
+                                                        $avgrating = ($avgrating + $orderItem->review->rating)/$r_product->orderItems->where('rstatus',1)->count();
+                                                        $avgrating = ceil($avgrating);
+                                                    @endphp
+                                                @endforeach
+                                                @for ($i=1;$i<=5;$i++)
+                                                    @if ($i<=$avgrating)
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                    @else
+                                                        <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                                    @endif
+                                                @endfor
                                                 <div class="pro-review">
-                                                    <span>1 review(s)</span>
+                                                    <span>{{$r_product->orderItems->where('rstatus',1)->count()}} review(s)</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -538,13 +529,24 @@
                                                     </div> --}}
                                                 </div>
                                                 <div class="ratings">
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span class="good"><i class="fa fa-star"></i></span>
-                                                    <span><i class="fa fa-star"></i></span>
+                                                    @php
+                                                        $avgrating = 0;
+                                                    @endphp
+                                                    @foreach ($p_product->orderItems->where('rstatus',1) as $orderItem)
+                                                        @php
+                                                            $avgrating = ($avgrating + $orderItem->review->rating)/$p_product->orderItems->where('rstatus',1)->count();
+                                                            $avgrating = ceil($avgrating);
+                                                        @endphp
+                                                    @endforeach
+                                                    @for ($i=1;$i<=5;$i++)
+                                                        @if ($i<=$avgrating)
+                                                            <span class="good"><i class="fa fa-star"></i></span>
+                                                        @else
+                                                            <span><i class="fa fa-star" style="color: gainsboro"></i></span>
+                                                        @endif
+                                                    @endfor
                                                     <div class="pro-review">
-                                                        <span>1 review(s)</span>
+                                                        <span>{{$p_product->orderItems->where('rstatus',1)->count()}} review(s)</span>
                                                     </div>
                                                 </div>
                                             </div>
