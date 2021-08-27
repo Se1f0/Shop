@@ -132,6 +132,7 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.coupons') }}">All coupons</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.orders') }}">All Orders</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.contact') }}">All Contacts</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.settings') }}">Settings</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -343,7 +344,7 @@
                                             </li>
                                             @livewire('wishlist-count-component')
                                             {{-- <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a></li> --}}
-                                            <li class="{{\Request::route()->getName() == 'contact' ? 'active' : 'static'}}"><a href="/contact-us"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Contact Us</a>
+                                            <li class="{{\Request::route()->getName() == 'contact' ? 'active' : 'static'}}"><a href="/contact-us"><i class="fa fa-envelope" aria-hidden="true"></i>Contact Us</a>
                                             <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li>
                                         </ul>
                                     </nav>
