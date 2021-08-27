@@ -130,7 +130,8 @@
                                                                 <a class="dropdown-item" href="{{ route('admin.homecategories') }}">Manage Home Categories</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.sale') }}">Sale Setting</a>
                                                                 <a class="dropdown-item" href="{{ route('admin.coupons') }}">All coupons</a>
-                                                                <a class="dropdown-item" href="{{ route('admin.orders') }}">All orders</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.orders') }}">All Orders</a>
+                                                                <a class="dropdown-item" href="{{ route('admin.contact') }}">All Contacts</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -152,9 +153,10 @@
                                                             <div class="dropdown-menu" aria-labelledby="myaccount">
                                                                 <a class="dropdown-item" href="{{ route('user.dashboard') }}">Dashboard</a>
                                                                 <a class="dropdown-item" href="{{route('user.orders')}}">My Orders</a>
-                                                                <a class="dropdown-item" href="my-account.html">My Wishlist</a>
+                                                                {{-- <a class="dropdown-item" href="my-account.html">My Wishlist</a>
                                                                 <a class="dropdown-item" href="my-account.html">My Cart</a>
-                                                                <a class="dropdown-item" href="my-account.html">Checkout</a>
+                                                                <a class="dropdown-item" href="my-account.html">Checkout</a> --}}
+                                                                <a class="dropdown-item" href="{{route('user.changepassword')}}">Change My Password</a>
                                                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> logout</a>
                                                                 <form  id="logout-form" method="POST" action= "{{ route('logout') }}">
                                                                     @csrf
@@ -341,7 +343,7 @@
                                             </li>
                                             @livewire('wishlist-count-component')
                                             {{-- <li class="{{\Request::route()->getName() == 'checkout' ? 'active' : 'static'}}"><a href="/checkout"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Checkout</a></li> --}}
-                                            <li class="static"><a href="\thank-you"><i class="fa fa-envelope" aria-hidden="true"></i>Contact us</a></li>
+                                            <li class="{{\Request::route()->getName() == 'contact' ? 'active' : 'static'}}"><a href="/contact-us"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Contact Us</a>
                                             <li class="static"><a href="contact-us.html"><i class="fa fa-question-circle" aria-hidden="true"></i>About us</a></li>
                                         </ul>
                                     </nav>
