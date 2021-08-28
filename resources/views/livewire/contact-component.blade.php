@@ -69,9 +69,9 @@
                         <h2>contact us</h2>
                         <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas human.</p>
                         <ul>
-                            <li><i class="fa fa-fax"></i> Address : No 40 Baria Sreet 133/2 NewYork City</li>
-                            <li><i class="fa fa-phone"></i> info@yourdomain.com</li>
-                            <li><i class="fa fa-envelope-o"></i> +88013245657</li>
+                            <li><i class="fa fa-fax"></i> Address : {{$setting->address}}</li>
+                            <li><i class="fa fa-phone"></i> {{$setting->email}}</li>
+                            <li><i class="fa fa-envelope-o"></i> {{$setting->phone}}</li>
                         </ul>
                         <div class="working-time">
                             <h3>Working hours</h3>
@@ -87,8 +87,7 @@
     <!-- map area start -->
     <div class="map-area-wrapper">
         <div class="container">
-                <div id="map_content" data-lat="23.763491" data-lng="90.431167" data-zoom="8" data-maptitle="HasTech" data-mapaddress="Floor# 4, House# 5, Block# C     </br> Banasree Main Rd, Dhaka">
-                </div>
+            <iframe src="{{$setting->map}}" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
     <!-- map area end -->
