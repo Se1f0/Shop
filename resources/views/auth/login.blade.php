@@ -58,7 +58,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">login-register</li>
+                                    <li class="breadcrumb-item active" aria-current="page">login</li>
                                 </ul>
                             </nav>
                         </div>
@@ -94,7 +94,7 @@
                                                     <label class="custom-control-label" for="rememberMe">Remember Me</label>
                                                 </div>
                                             </div>
-                                            <a href="#" class="{{route('password.request')}}">Forget Password?</a>
+                                            <a href="{{route('password.request')}}" class="forget-pwd">Forget Password?</a>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
