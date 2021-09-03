@@ -123,6 +123,18 @@
                                                         @enderror
                                                     </div>
                                                     <div class="single-input-item">
+                                                        <label for="product-gal" class="required">Product Gallery</label>
+                                                        <input class="form-control form-control-lg" type="file" id="product-gal" wire:model="images" class="input-file" multiple/>
+                                                        @if ($images)
+                                                            @foreach ($images as $image)
+                                                                <img src="{{$image->temporaryUrl()}}" width="120"/>
+                                                            @endforeach
+                                                        @endif
+                                                        @error('images')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="single-input-item">
                                                         <label for="category" class="required">Category</label>
                                                         <select class="form-control" name="category" id="category" wire:model="category_id" >
                                                             @foreach ($categories as $category)

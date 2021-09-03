@@ -23,6 +23,8 @@
     <div class="product-details-wrapper">
         @php
             $witems = Cart::instance('wishlist')->content()->pluck('id');
+            $images = explode(",",$product->images);
+            $num = 1;
         @endphp
         <div class="container">
             <div class="row">
@@ -33,24 +35,23 @@
                             <div class="col-lg-6">
                                 <div class="product-large-slider mb-20 slick-arrow-style_2" wire:ignore>
                                     <div class="pro-large-img img-zoom" id="img1">
-                                        <img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="" />
+                                        <img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="{{$product->name}}" />
                                     </div>
-                                    <div class="pro-large-img img-zoom" id="img2">
-                                        <img src="{{ asset('assets/img/product/product-details-img2.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom" id="img3">
-                                        <img src="{{ asset('assets/img/product/product-details-img3.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom" id="img4">
-                                        <img src="{{ asset('assets/img/product/product-details-img4.jpg')}}" alt=""/>
-                                    </div>
+                                    @foreach ($images as $image)
+                                        @if ($image)
+                                            <div class="pro-large-img img-zoom" id="img{{$num}}">
+                                                <img src="{{ asset('assets/img/product')}}/{{$image}}" alt="{{$product->name}}" />
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="pro-nav slick-padding2 slick-arrow-style_2" wire:ignore>
-                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img4.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product/product-details-img2.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="{{$product->name}}" /></div>
+                                    @foreach ($images as $image)
+                                        @if ($image)
+                                            <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product')}}/{{$image}}" alt="{{$product->name}}" /></div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-lg-6">
