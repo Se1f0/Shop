@@ -21,7 +21,6 @@
 
     <div class="my-account-wrapper">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-12">
                     <!-- My Account Page Start -->
