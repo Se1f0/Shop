@@ -120,9 +120,26 @@
                                                         @else
                                                             <img src="{{asset('assets/img/product')}}/{{$image}}" width="120"/>
                                                         @endif
-                                                        {{-- @error('newimage')
+                                                        @error('newimage')
                                                             <p class="text-danger">{{$message}}</p>
-                                                        @enderror --}}
+                                                        @enderror
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <label for="product-image" class="required">Product Gallery</label>
+                                                        <input class="form-control form-control-lg" type="file" id="product-image" wire:model="newimages" multiple class="input-file"/>
+                                                        @if ($newimages)
+                                                        @foreach ($newimages as $newimage)
+                                                            @if ($newimage)
+                                                                <img src="{{$newimage->temporaryUrl()}}" width="120"/>
+                                                            @endif
+                                                        @endforeach
+                                                        @else
+                                                        @foreach ($images as $image)
+                                                            @if ($image)
+                                                                <img src="{{asset('assets/img/product')}}/{{$image}}" width="120"/>
+                                                            @endif
+                                                        @endforeach
+                                                        @endif
                                                     </div>
                                                     <div class="single-input-item">
                                                         <label for="category" class="required">Category</label>

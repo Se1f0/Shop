@@ -4989,6 +4989,12 @@ only screen and (max-width: 767px) {
     padding-left: 3px;
 }
 
+.product-details-des .availability span span{
+    color: #dd2241;
+    font-size: 14px;
+    padding-left: 3px;
+}
+
 .product-details-des .useful-links {
     display: -webkit-box;
     display: -moz-box;

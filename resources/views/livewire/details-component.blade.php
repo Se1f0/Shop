@@ -32,8 +32,8 @@
                     <!-- product details inner end -->
                     <div class="product-details-inner">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="product-large-slider mb-20 slick-arrow-style_2" wire:ignore>
+                            <div class="col-lg-6" wire:ignore>
+                                <div class="product-large-slider mb-20 slick-arrow-style_2">
                                     <div class="pro-large-img img-zoom" id="img1">
                                         <img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="{{$product->name}}" />
                                     </div>
@@ -45,7 +45,7 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <div class="pro-nav slick-padding2 slick-arrow-style_2" wire:ignore>
+                                <div class="pro-nav slick-padding2 slick-arrow-style_2">
                                     <div class="pro-nav-thumb"><img src="{{ asset('assets/img/product')}}/{{$product->image}}" alt="{{$product->name}}" /></div>
                                     @foreach ($images as $image)
                                         @if ($image)
@@ -83,7 +83,11 @@
                                     </div> --}}
                                     <div class="availability mt-10">
                                         <h5>Availability:</h5>
-                                        <span>{{$product->stock_status}}</span>
+                                        @if ($product->stock_status == 'instock')
+                                            <span>{{$product->stock_status}}</span>
+                                        @else
+                                            <span><span>{{$product->stock_status}}</span></span>
+                                        @endif
                                     </div>
                                     <div class="pricebox">
                                         @if ($product->sale_price > 0)
@@ -225,7 +229,7 @@
                     <!-- product details reviews end -->
 
                     <!-- related products area start -->
-                    <div class="related-products-area mt-34">
+                    <div class="related-products-area mt-34" wire:ignore>
                         <div class="section-title mb-30">
                             <div class="title-icon">
                                 <i class="fa fa-desktop"></i>
@@ -505,7 +509,7 @@
                 <div class="col-lg-3">
                     <div class="shop-sidebar-wrap fix mt-md-22 mt-sm-22">
                         <!-- featured category start -->
-                        <div class="sidebar-widget mb-22">
+                        <div class="sidebar-widget mb-22" wire:ignore>
                             <div class="section-title-2 d-flex justify-content-between mb-28">
                                 <h3>featured</h3>
                                 <div class="category-append"></div>
