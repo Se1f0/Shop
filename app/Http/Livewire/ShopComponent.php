@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -61,7 +62,11 @@ class ShopComponent extends Component
         }
         $product_count = Product::count();
         $pages = ceil($product_count/12);
-        $firs_p = 1;
+
+        if (Auth::check()) {
+            Cart::instance('cart')->store(Auth::user()->email);
+        }
+
         return view('livewire.shop-component',['products' => $products,'count' => $product_count,'n_pages' => $pages,'pages' => $pages])->layout("layouts.base");
     }
 }

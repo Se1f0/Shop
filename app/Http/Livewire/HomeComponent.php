@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\HomeCategory;
 use App\Models\HomeSlider;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class HomeComponent extends Component
@@ -19,6 +21,10 @@ class HomeComponent extends Component
         $categories = Category::whereIn('id',$cats)->get();
         $no_of_products = $category->no_of_products;
         $s_products = Product::where('sale_price','>',0)->inRandomOrder()->get()->take(8);
+
+        if (Auth::check()) {
+            Cart::instance('cart')->restore(Auth::user()->email);
+        }
         return view('livewire.home-component',
         [
             'sliders' => $sliders,
@@ -26,6 +32,6 @@ class HomeComponent extends Component
             'categories' => $categories,
             'no_of_products' => $no_of_products,
             's_products' => $s_products
-            ])->layout('layouts.base');
+        ])->layout('layouts.base');
     }
 }
