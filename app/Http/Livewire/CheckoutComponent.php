@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Shipping;
@@ -10,6 +11,7 @@ use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
@@ -225,6 +227,7 @@ class CheckoutComponent extends Component
                 $this->tahnkyou = 0;
             }
         }
+        $this->sendOrderConfirmation($order);
     }
 
     public function resetCart()
@@ -242,6 +245,11 @@ class CheckoutComponent extends Component
         $transaction->mode = $this->payementmode;
         $transaction->status = $status;
         $transaction->save();
+    }
+
+    public function sendOrderConfirmation($order)
+    {
+        Mail::to($order->email)->send(new OrderMail($order));
     }
 
     public function verifyForCheckout()
