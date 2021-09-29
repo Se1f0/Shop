@@ -27,7 +27,7 @@
                     <strong>Success</strong> {{Session::get('stripe_error')}}
                 </div>
             @endif
-            <form wire:submit.prevent="placeOrder">
+            <form wire:submit.prevent="placeOrder" onsubmit="$('#processing').show();">
                 <div class="row">
                     <!-- Checkout Billing Details -->
                     <div class="col-lg-6">
@@ -282,6 +282,12 @@
                                     </div>
                                     @error('payementmode') <span class="text-danger">{{$message}}</span> @enderror
                                     <div class="summary-footer-area mt-20">
+                                        @if ($errors->isEmpty())
+                                            <div wire:ignore id="processing" style="font-size:22px; margin-bottom:20px; padding-left:37px; color:green; display:none">
+                                                <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                                                <span>Processing...</span>
+                                            </div>
+                                        @endif
                                         {{-- <div class="custom-control custom-checkbox mb-14">
                                             <input type="checkbox" class="custom-control-input" id="terms"/>
                                             <label class="custom-control-label" for="terms">I have read and agree to the website <a
