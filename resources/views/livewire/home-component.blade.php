@@ -1,4 +1,7 @@
 <div class="wrapper">
+    @php
+        $witems = Cart::instance('wishlist')->content()->pluck('id');
+    @endphp
     <!-- hero slider start -->
     <div class="container">
         <div class="row">
@@ -77,7 +80,7 @@
                 <div class="col-lg-3">
                     <div class="home-sidebar">
                         <!-- hot deals area start -->
-                        <div class="main-sidebar hot-deals-wrap mb-30">
+                        <div class="main-sidebar hot-deals-wrap mb-30" wire:ignore>
                             <div class="section-title-2 d-flex justify-content-between mb-28">
                                 <h3>hot deals</h3>
                                 <div class="slick-append"></div>
@@ -208,7 +211,7 @@
                         <!-- hot deals area end -->
 
                         <!-- best seller area start -->
-                        <div class="main-sidebar category-wrapper mb-24">
+                        <div class="main-sidebar category-wrapper mb-24" wire:ignore>
                             <div class="section-title-2 d-flex justify-content-between mb-28">
                                 <h3>best seller</h3>
                                 <div class="category-append"></div>
@@ -459,7 +462,7 @@
                         <!-- best seller area end -->
 
                         <!-- blog area start -->
-                        <div class="main-sidebar blog-area mb-24">
+                        {{-- <div class="main-sidebar blog-area mb-24">
                             <div class="section-title-2 d-flex justify-content-between mb-28">
                                 <h3>latest blog</h3>
                                 <div class="category-append"></div>
@@ -476,10 +479,10 @@
                                         <h3><a href="blog-details.html">post format audio</a></h3>
                                         <div class="blog-meta">
                                             <span class="posted-author">by: admin</span>
-                                            <span class="post-date">25 Nov, 2018</span>
+                                            <span class="post-date">25 nov, 2018</span>
                                         </div>
-                                        <p>Curabitur sed diam enim. Sed varius faucibus lectus, a scelerisque massa
-                                            posuere ac. Quisque dapibus, est ac...</p>
+                                        <p>curabitur sed diam enim. sed varius faucibus lectus, a scelerisque massa
+                                            posuere ac. quisque dapibus, est ac...</p>
                                     </div>
                                     <a href="blog-details.html">read more <i class="fa fa-long-arrow-right"></i></a>
                                 </div> <!-- end single blog item -->
@@ -493,20 +496,20 @@
                                         <h3><a href="blog-details.html">post format image</a></h3>
                                         <div class="blog-meta">
                                             <span class="posted-author">by: admin</span>
-                                            <span class="post-date">25 Nov, 2018</span>
+                                            <span class="post-date">25 nov, 2018</span>
                                         </div>
-                                        <p>Curabitur sed diam enim. Sed varius faucibus lectus, a scelerisque massa
-                                            posuere ac. Quisque dapibus, est ac...</p>
+                                        <p>curabitur sed diam enim. sed varius faucibus lectus, a scelerisque massa
+                                            posuere ac. quisque dapibus, est ac...</p>
                                     </div>
                                     <a href="blog-details.html">read more <i class="fa fa-long-arrow-right"></i></a>
                                 </div> <!-- end single blog item -->
                             </div>
                             <!-- blog wrapper end -->
-                        </div>
+                        </div> --}}
                         <!-- blog area end -->
 
                         <!-- testimonial area start -->
-                        <div class="main-sidebar testimonial-area pb-sm-70">
+                        <div class="main-sidebar testimonial-area pb-sm-70" wire:ignore>
                             <div class="section-title-2 mb-28">
                                 <h3>Clients Say</h3>
                             </div> <!-- section title end -->
@@ -554,7 +557,7 @@
 
                 <div class="col-lg-9">
                     <!-- featured category area start -->
-                    <div class="feature-category-area mt-md-70">
+                    <div class="feature-category-area mt-md-70" wire:ignore>
                         <div class="section-title mb-30">
                             <div class="title-icon">
                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -819,7 +822,7 @@
                     <!-- banner statistic end -->
 
                     <!-- featured category area start -->
-                    <div class="feature-category-area">
+                    <div class="feature-category-area" wire:ignore>
                         <div class="section-title mb-30">
                             <div class="title-icon">
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
@@ -839,15 +842,23 @@
                                         <div class="product-label">
                                             <span>new</span>
                                         </div>
+                                        @if ($witems->contains($lproduct->id))
+                                            <div class="product-label-wish">
+                                                <span><i class="fa fa-heart"></i></span>
+                                            </div>
+                                        @endif
                                         <div class="product-action-link">
                                             {{-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span
                                                     data-toggle="tooltip" data-placement="left" title="Quick view"><i
                                                         class="fa fa-search"></i></span> </a> --}}
-                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
-                                                    class="fa fa-heart-o"></i></a>
+                                            @if ($witems->contains($lproduct->id))
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$lproduct->id}})" wire:ignore><i class="fa fa-heart"></i></a>
+                                            @else
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to Wishlist" wire:click.prevent="addToWishlist({{$lproduct->id}},'{{$lproduct->name}}',{{$lproduct->regular_price}})"><i class="fa fa-heart-o"></i></a>
+                                            @endif
                                             <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i
                                                     class="fa fa-refresh"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart"><i
+                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Add to cart" wire:click.prevent="store({{$lproduct->id}},'{{$lproduct->name}}',{{$lproduct->regular_price}})"><i
                                                     class="fa fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
@@ -1991,7 +2002,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="tab-content pb-md-20 pb-sm-20">
+            <div class="tab-content pb-md-20 pb-sm-20" wire:ignore>
                 @foreach ($categories as $key=>$category)
                     <div class="tab-pane fade {{$key == 0 ? 'active' : ''}}" id="category_{{$category->id}}">
                         <div class="feature-category-carousel-wrapper">

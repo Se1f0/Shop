@@ -8,7 +8,8 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">shop</li>
+                                <li class="breadcrumb-item" aria-current="page"><a href="/shop">shop</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">"{{$search}}"</li>
                             </ul>
                         </nav>
                     </div>
@@ -39,7 +40,11 @@
                                             <a href="#" data-target="list"><i class="fa fa-list"></i></a>
                                         </div>
                                         <div class="product-amount">
-                                            <p>Showing 1–16 of {{$count}} results</p>
+                                            @if ($page == $pages)
+                                                <p>Showing {{($page-1)*13}}–{{$count}} of {{$count}} results</p>
+                                            @else
+                                                <p>Showing {{($page-1)*13+1}}–{{$page * 12}} of {{$count}} results</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
