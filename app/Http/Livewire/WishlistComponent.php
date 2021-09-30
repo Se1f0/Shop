@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistComponent extends Component
 {
@@ -29,6 +30,10 @@ class WishlistComponent extends Component
 
     public function render()
     {
+        if (Auth::check()) {
+            Cart::instance('cart')->store(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
         return view('livewire.wishlist-component')->layout('layouts.base');
     }
 }
