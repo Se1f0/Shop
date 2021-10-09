@@ -34,6 +34,11 @@ class WishlistComponent extends Component
             Cart::instance('cart')->store(Auth::user()->email);
             Cart::instance('wishlist')->store(Auth::user()->email);
         }
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
         return view('livewire.wishlist-component')->layout('layouts.base');
     }
 }

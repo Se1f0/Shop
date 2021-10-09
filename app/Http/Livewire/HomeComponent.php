@@ -31,7 +31,7 @@ class HomeComponent extends Component
             if ($witem->id == $product_id) {
                 Cart::instance('wishlist')->remove($witem->rowId);
                 $this->emitTo('wishlist-count-component','refreshComponent');
-                return redirect()->route('home');
+                return redirect()->route('product.wishlist');
             }
         }
     }

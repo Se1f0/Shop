@@ -822,7 +822,7 @@
                     <!-- banner statistic end -->
 
                     <!-- featured category area start -->
-                    <div class="feature-category-area" wire:ignore>
+                    <div class="feature-category-area">
                         <div class="section-title mb-30">
                             <div class="title-icon">
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
@@ -852,7 +852,7 @@
                                                     data-toggle="tooltip" data-placement="left" title="Quick view"><i
                                                         class="fa fa-search"></i></span> </a> --}}
                                             @if ($witems->contains($lproduct->id))
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$lproduct->id}})" wire:ignore><i class="fa fa-heart"></i></a>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Remove from Wishlist" wire:click.prevent="removeFromWishlist({{$lproduct->id}})"><i class="fa fa-heart"></i></a>
                                             @else
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Add to Wishlist" wire:click.prevent="addToWishlist({{$lproduct->id}},'{{$lproduct->name}}',{{$lproduct->regular_price}})"><i class="fa fa-heart-o"></i></a>
                                             @endif
