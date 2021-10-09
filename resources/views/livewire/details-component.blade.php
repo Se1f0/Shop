@@ -196,7 +196,12 @@
                                             @foreach ($product->orderItems->where('rstatus',1) as $orderItem)
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
-                                                        <img src="{{ asset('assets/img/about/avatar.jpg')}}" alt="">
+                                                        @if ($orderItem->order->user->profile->image)
+                                                            <img src="{{ asset('assets/img/profile')}}/{{$orderItem->order->user->profile->image}}" alt="{{$orderItem->order->user->name}}">
+                                                        @else
+                                                            <img src="{{ asset('assets/img/profile/default.png')}}" alt="{{$orderItem->order->user->name}}">
+                                                        @endif
+
                                                     </div>
                                                     <div class="review-box">
                                                         <div class="ratings">
