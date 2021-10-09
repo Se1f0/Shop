@@ -36,9 +36,12 @@
                                         <div class="myaccount-content">
                                             <h3>
                                                 <div class="row">
-                                                    <div class="col-10">My Profile</div>
-                                                    <div class="col"><a href="{{route('user.editprofile')}}" class="btn btn-danger" role="button">Update Profile</a></h3></div>
+                                                    <div class="col">My Profile</div>
+                                                    <div class="col">
+                                                        <a href="{{route('user.editprofile')}}" class="btn btn-danger pull-right" role="button">Update Profile</a>
+                                                    </div>
                                                 </div>
+                                            </h3>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     @if ($user->profile->image)

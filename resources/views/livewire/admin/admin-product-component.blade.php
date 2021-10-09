@@ -35,7 +35,17 @@
                                             <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
                                         @endif
                                         <div class="myaccount-content">
-                                            <h3>All Products</h3>
+                                            <h3>
+                                                <div class="row">
+                                                    <div class="col">All Products</div>
+                                                    <div class="col">
+                                                        <a href="{{route('admin.addproduct')}}" class="btn btn-success pull-right" role="button">Add New</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" placeholder="Search..." wire:model="searchTerm" />
+                                                    </div>
+                                                </div>
+                                            </h3>
                                             <div class="myaccount-table table-responsive text-center">
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
@@ -70,7 +80,7 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                <a href="{{route('admin.addproduct')}}" class="btn btn-success mb-10" role="button">Add New</a>
+                                                {{-- <a href="{{route('admin.addproduct')}}" class="btn btn-success mb-10" role="button">Add New</a> --}}
                                                 <div class="mb-50 mt-20">
                                                     {{$products->links('pagination-links')}}
                                                 </div>
